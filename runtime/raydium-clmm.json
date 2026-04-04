@@ -32,9 +32,9 @@
         "input_mint": "$input.input_mint",
         "output_mint": "$input.output_mint",
         "ex_bitmap": "$input.ex_bitmap",
-        "tick_array0": "$input.tick_array_0",
-        "tick_array1": "$input.tick_array_1",
-        "tick_array2": "$input.tick_array_2"
+        "tick_array0": "$input.tick_array0",
+        "tick_array1": "$input.tick_array1",
+        "tick_array2": "$input.tick_array2"
       }
     }
   },
