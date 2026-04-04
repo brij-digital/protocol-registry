@@ -1,0 +1,76 @@
+{
+  "version": "0.2.0",
+  "globalCommands": [
+    "/help",
+    "/idl-list",
+    "/idl-template",
+    "/meta-explain",
+    "/idl-view",
+    "/idl-send",
+    "/write-raw",
+    "/read-raw"
+  ],
+  "protocols": [
+    {
+      "id": "token-index-mainnet",
+      "name": "Token Index",
+      "network": "mainnet-beta",
+      "programId": "11111111111111111111111111111111",
+      "codamaIdlPath": "/protocols/token-index/codama.json",
+      "agentRuntimePath": "/protocols/token-index/runtime.json",
+      "ingestSpecPath": null,
+      "indexedReadsPath": "/protocols/token-index/indexed-reads.json",
+      "transport": "local-token-index",
+      "supportedCommands": [
+        "/tokens"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "orca-whirlpool-mainnet",
+      "name": "Orca Whirlpools",
+      "network": "mainnet-beta",
+      "programId": "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc",
+      "codamaIdlPath": "/protocols/orca-whirlpool/codama.json",
+      "agentRuntimePath": "/protocols/orca-whirlpool/runtime.json",
+      "ingestSpecPath": "/protocols/orca-whirlpool/ingest.json",
+      "indexedReadsPath": "/protocols/orca-whirlpool/indexed-reads.json",
+      "transport": "local-orca-whirlpool",
+      "supportedCommands": [
+        "/orca-list-pools",
+        "/orca"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "pump-amm-mainnet",
+      "name": "Pump AMM",
+      "network": "mainnet-beta",
+      "programId": "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA",
+      "codamaIdlPath": "/protocols/pump-amm/codama.json",
+      "agentRuntimePath": "/protocols/pump-amm/runtime.json",
+      "ingestSpecPath": "/protocols/pump-amm/ingest.json",
+      "indexedReadsPath": "/protocols/pump-amm/indexed-reads.json",
+      "transport": "local-pump-amm",
+      "supportedCommands": [
+        "/pump-amm"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "pump-core-mainnet",
+      "name": "Pump Core",
+      "network": "mainnet-beta",
+      "programId": "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
+      "codamaIdlPath": "/protocols/pump-core/codama.json",
+      "agentRuntimePath": "/protocols/pump-core/runtime.json",
+      "ingestSpecPath": "/protocols/pump-core/ingest.json",
+      "indexedReadsPath": "/protocols/pump-core/indexed-reads.json",
+      "transport": "local-pump-core",
+      "supportedCommands": [
+        "/pump-curve"
+      ],
+      "status": "active"
+    }
+  ]
+}

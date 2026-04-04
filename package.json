@@ -1,0 +1,6 @@
+{
+  "name": "@brij-digital/protocol-registry",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Protocol pack registry for AppPack"
+}
