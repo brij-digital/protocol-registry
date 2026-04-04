@@ -12,6 +12,19 @@
   ],
   "protocols": [
     {
+      "id": "kamino-lending-mainnet",
+      "name": "Kamino K-Lend",
+      "network": "mainnet-beta",
+      "programId": "KLend2g3cP87fffoy8q1mQqGKjrxjC8boSyAYavgmjD",
+      "codamaIdlPath": "/codama/kamino-lending.json",
+      "agentRuntimePath": "/runtime/kamino-lending.json",
+      "transport": "local-kamino-lending",
+      "supportedCommands": [
+        "/kamino-lending"
+      ],
+      "status": "active"
+    },
+    {
       "id": "orca-whirlpool-mainnet",
       "name": "Orca Whirlpools",
       "network": "mainnet-beta",
