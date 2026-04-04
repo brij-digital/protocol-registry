@@ -1,5 +1,5 @@
 {
-  "$schema": "/idl/solana_action_runner.schema.v1.json",
+  "$schema": "/schemas/solana_action_runner.schema.v1.json",
   "schema": "solana-action-runner.v1",
   "actionId": "quote_swap_orca",
   "title": "Quote Swap on Orca",
