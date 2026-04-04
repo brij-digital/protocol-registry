@@ -121,6 +121,19 @@
       "transport": "local",
       "supportedCommands": [],
       "status": "active"
+    },
+    {
+      "id": "sanctum-mainnet",
+      "name": "Sanctum Router",
+      "network": "mainnet-beta",
+      "programId": "stkitrT1Uoy18Dk1fTrgPw8W6MVzoCfYoAFT4MLsmhq",
+      "codamaIdlPath": "/codama/sanctum.json",
+      "agentRuntimePath": "/runtime/sanctum.json",
+      "ingestSpecPath": null,
+      "indexedReadsPath": null,
+      "transport": "local",
+      "supportedCommands": [],
+      "status": "active"
     }
   ]
 }

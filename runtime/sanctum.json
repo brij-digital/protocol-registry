@@ -1,0 +1,11 @@
+{
+  "$schema": "/schemas/solana_agent_runtime.schema.v1.json",
+  "schema": "solana-agent-runtime.v1",
+  "protocol_id": "sanctum-mainnet",
+  "program_id": "stkitrT1Uoy18Dk1fTrgPw8W6MVzoCfYoAFT4MLsmhq",
+  "codama_path": "/codama/sanctum.json",
+  "label": "Sanctum Router",
+  "writes": {},
+  "views": {},
+  "transforms": {}
+}
