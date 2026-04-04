@@ -1,24 +1,46 @@
-# protocol-registry
+# Protocol Registry
 
-Single source of truth for AppPack protocol specs.
+Source of truth for all AppPack protocol specs.
 
-## Layout
+## Structure
 
-- `registry.json`: master protocol manifest for local filesystem consumers
-- `schemas/`: runtime-owned shared schemas synced from `../apppack-runtime/schemas/`
-- `protocols/<protocol>/`: protocol-specific artifacts such as `codama.json`, `runtime.json`, `ingest.json`, `indexed-reads.json`, and optional extras like `directory.db.json`, `seed.json`, or `compute.json`
-- `action-runners/`: action runner registry plus individual runner specs
+```
+registry.json              # Master registry — lists all protocols and paths
+schemas/                   # Shared JSON schemas (owned by apppack-runtime)
+runtime/                   # Agent runtime specs (writes, views, transforms)
+codama/                    # Codama IDLs (on-chain program descriptions)
+indexing/
+  ingest/                  # Ingest specs (Carbon pipeline definitions)
+  indexed-reads/           # Indexed read specs (query projections)
+action-runners/            # Multi-step action runner specs
+```
 
-## Adding or updating a protocol
+## Protocols
 
-1. Create or update `protocols/<protocol>/`.
-2. Add the protocol entry to `registry.json` using `/protocols/<protocol>/...` paths.
-3. Keep `runtime.json`, `ingest.json`, and any other internal references pointed at registry-local paths.
-4. If shared schemas changed, sync them from `../apppack-runtime/schemas/` before exporting to consumers.
+| Protocol | Swap | LP | Quotes | Indexing |
+|---|---|---|---|---|
+| **Orca Whirlpool** | ✅ swap, two-hop | ✅ open, close, increase, decrease | ✅ exact-in, exact-out, LP quotes | ✅ trades, snapshots |
+| **Pump AMM** | ✅ buy, sell | — | ✅ preview buy/sell | ✅ trades, snapshots |
+| **Pump Core** | ✅ buy | — | ✅ preview buy | ✅ trades, curves |
 
-## Consumer sync
+## How It Works
 
-- `ec-ai-wallet/scripts/sync-registry.mjs` exports a flattened synced copy into `public/idl/`
-- `apppack-view-service/scripts/sync-wallet-packs.mjs` exports the same flattened copy into `idl/`
+- **Agents** load protocol packs from this registry to execute operations locally
+- **View service** syncs indexing specs for Carbon ingestion and query projections
+- **Wallet** syncs specs for the browser UI
+- **Conformance tests** validate spec correctness against official SDKs
 
-Consumer copies rewrite registry-local paths back to `/idl/...` so existing wallet and view-service checks keep working.
+## Adding a Protocol
+
+1. Add Codama IDL to `codama/`
+2. Author runtime spec in `runtime/`
+3. Author ingest + indexed-reads specs in `indexing/`
+4. Add entry to `registry.json`
+5. Add conformance tests to `protocol-conformance` repo
+
+## Consumers
+
+All repos sync from this registry:
+- `ec-ai-wallet` — syncs to `public/idl/`
+- `apppack-view-service` — syncs to `idl/`
+- `protocol-conformance` — reads directly via registry path

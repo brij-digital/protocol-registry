@@ -1,5 +1,5 @@
 {
-  "$schema": "/schemas/declarative_decoder_runtime.schema.v1.json",
+  "$schema": "/idl/declarative_decoder_runtime.schema.v1.json",
   "schema": "declarative-decoder-runtime.v1",
   "version": "0.1.0",
   "protocolId": "pump-core-mainnet",
@@ -9,7 +9,7 @@
     "pumpfun": {
       "kind": "generated_idl_decoder",
       "family": "codama",
-      "codamaPath": "/protocols/pump-core/codama.json",
+      "codamaPath": "/idl/pump_core.codama.json",
       "artifact": "pumpfun"
     }
   },

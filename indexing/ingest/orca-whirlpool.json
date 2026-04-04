@@ -1,5 +1,5 @@
 {
-  "$schema": "/schemas/declarative_decoder_runtime.schema.v1.json",
+  "$schema": "/idl/declarative_decoder_runtime.schema.v1.json",
   "schema": "declarative-decoder-runtime.v1",
   "version": "0.1.0",
   "protocolId": "orca-whirlpool-mainnet",
@@ -9,7 +9,7 @@
     "orca_whirlpool": {
       "kind": "generated_idl_decoder",
       "family": "codama",
-      "codamaPath": "/protocols/orca-whirlpool/codama.json",
+      "codamaPath": "/idl/orca_whirlpool.codama.json",
       "artifact": "orca_whirlpool"
     }
   },
