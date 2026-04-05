@@ -3,11 +3,11 @@
   "runners": [
     {
       "actionId": "quote_swap_orca",
-      "path": "/idl/quote_swap_orca.runner.json"
+      "path": "/action-runners/quote_swap_orca.runner.json"
     },
     {
       "actionId": "draft_swap_orca",
-      "path": "/idl/draft_swap_orca.runner.json"
+      "path": "/action-runners/draft_swap_orca.runner.json"
     }
   ]
 }

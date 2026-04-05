@@ -9,7 +9,7 @@
     "pump_swap": {
       "kind": "generated_idl_decoder",
       "family": "codama",
-      "codamaPath": "/idl/pump_amm.codama.json",
+      "codamaPath": "/codama/pump-amm.json",
       "artifact": "pump_swap"
     }
   },

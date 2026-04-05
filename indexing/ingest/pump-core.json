@@ -9,7 +9,7 @@
     "pumpfun": {
       "kind": "generated_idl_decoder",
       "family": "codama",
-      "codamaPath": "/idl/pump_core.codama.json",
+      "codamaPath": "/codama/pump-core.json",
       "artifact": "pumpfun"
     }
   },
