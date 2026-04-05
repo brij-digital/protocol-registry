@@ -24,72 +24,9 @@
         "log_event"
       ],
       "filters": {}
-    },
-    "orca_whirlpool_snapshot": {
-      "kind": "rpc_account_snapshot",
-      "programId": "$protocol.programId",
-      "commitment": "confirmed",
-      "decoderRef": "orca_whirlpool",
-      "decodeTargets": [
-        "account"
-      ],
-      "filters": {
-        "accountName": "Whirlpool",
-        "targetsFrom": {
-          "kind": "incomplete_state_from_records",
-          "stateRecordName": "Whirlpool",
-          "missingFields": [
-            "tokenDecimalsA",
-            "tokenDecimalsB"
-          ],
-          "recordNames": [
-            "SwapEvent"
-          ],
-          "addressField": "resource_id",
-          "lookbackMinutes": 1440,
-          "limit": 500
-        }
-      }
-    },
-    "orca_whirlpool_snapshot_backfill": {
-      "kind": "rpc_account_snapshot",
-      "programId": "$protocol.programId",
-      "commitment": "confirmed",
-      "decoderRef": "orca_whirlpool",
-      "decodeTargets": [
-        "account"
-      ],
-      "filters": {
-        "accountName": "Whirlpool",
-        "targetsFrom": {
-          "kind": "incomplete_state_from_state",
-          "stateRecordName": "Whirlpool",
-          "missingFields": [
-            "tokenDecimalsA",
-            "tokenDecimalsB"
-          ],
-          "limit": 500
-        }
-      }
     }
   },
   "matchRules": [
-    {
-      "source": "orca_whirlpool_snapshot",
-      "match": {
-        "decodedType": "account",
-        "name": "Whirlpool"
-      },
-      "pipeline": "whirlpool_snapshot"
-    },
-    {
-      "source": "orca_whirlpool_snapshot_backfill",
-      "match": {
-        "decodedType": "account",
-        "name": "Whirlpool"
-      },
-      "pipeline": "whirlpool_snapshot"
-    },
     {
       "source": "orca_whirlpool_crawler",
       "match": {
@@ -177,54 +114,6 @@
             "postSqrtPrice": "$ctx.postSqrtPrice",
             "lpFeeAtomic": "$ctx.lpFeeAtomic",
             "protocolFeeAtomic": "$ctx.protocolFeeAtomic",
-            "observedAt": "$ctx.observedAt"
-          }
-        }
-      }
-    },
-    "whirlpool_snapshot": {
-      "extract": {
-        "pool": "$update.pubkey",
-        "marketType": "whirlpool",
-        "tokenMintA": "$decoded.token_mint_a",
-        "tokenMintB": "$decoded.token_mint_b",
-        "tokenVaultA": "$decoded.token_vault_a",
-        "tokenVaultB": "$decoded.token_vault_b",
-        "tickSpacing": "$decoded.tick_spacing",
-        "feeRateRaw": "$decoded.fee_rate",
-        "liquidity": "$decoded.liquidity",
-        "tickCurrentIndex": "$decoded.tick_current_index",
-        "sqrtPrice": "$decoded.sqrt_price",
-        "observedAt": "$update.eventTime"
-      },
-      "compute": [
-        {
-          "name": "feeRateBps",
-          "compute": "math.safe_div",
-          "dividend": "$ctx.feeRateRaw",
-          "divisor": 100
-        }
-      ],
-      "emit": {
-        "state": {
-          "recordKind": "account",
-          "recordName": "Whirlpool",
-          "subjectId": "$ctx.pool",
-          "resourceId": "$ctx.pool",
-          "eventTime": "$ctx.observedAt",
-          "payload": {
-            "pool": "$ctx.pool",
-            "marketType": "$ctx.marketType",
-            "tokenMintA": "$ctx.tokenMintA",
-            "tokenMintB": "$ctx.tokenMintB",
-            "tokenVaultA": "$ctx.tokenVaultA",
-            "tokenVaultB": "$ctx.tokenVaultB",
-            "tickSpacing": "$ctx.tickSpacing",
-            "feeRateRaw": "$ctx.feeRateRaw",
-            "feeRateBps": "$feeRateBps",
-            "liquidity": "$ctx.liquidity",
-            "tickCurrentIndex": "$ctx.tickCurrentIndex",
-            "sqrtPrice": "$ctx.sqrtPrice",
             "observedAt": "$ctx.observedAt"
           }
         }
