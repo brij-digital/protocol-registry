@@ -1,5 +1,5 @@
 {
-  "$schema": "/idl/declarative_decoder_runtime.schema.v1.json",
+  "$schema": "/schemas/declarative_decoder_runtime.schema.v1.json",
   "schema": "declarative-decoder-runtime.v1",
   "version": "0.1.0",
   "protocolId": "pump-core-mainnet",
