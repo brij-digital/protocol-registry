@@ -405,42 +405,24 @@
       "additionalProperties": false
     },
     "computeStepSpec": {
-      "oneOf": [
-        {
-          "type": "object",
-          "required": ["ref", "output"],
-          "properties": {
-            "ref": {
-              "type": "string",
-              "description": "Transform reference — same catalog as runtime transforms"
-            },
-            "inputs": {
-              "type": "object",
-              "additionalProperties": { "$ref": "#/$defs/stringOrTemplate" },
-              "description": "Named inputs passed to the transform"
-            },
-            "output": {
-              "type": "string",
-              "description": "Variable name to store the result"
-            }
-          },
-          "additionalProperties": false
+      "type": "object",
+      "required": ["ref", "output"],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "description": "Transform reference — same catalog as runtime transforms"
         },
-        {
+        "inputs": {
           "type": "object",
-          "required": ["name", "compute"],
-          "description": "Legacy format — supported for backward compatibility",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "compute": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": { "$ref": "#/$defs/stringOrTemplate" }
+          "additionalProperties": { "$ref": "#/$defs/stringOrTemplate" },
+          "description": "Named inputs passed to the transform"
+        },
+        "output": {
+          "type": "string",
+          "description": "Variable name to store the result"
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "emitSpec": {
       "type": "object",
@@ -626,8 +608,7 @@
         },
         "dir": {
           "type": "string",
-          "enum": ["asc", "desc"],
-          "description": "Alias for order"
+          "enum": ["asc", "desc"]
         }
       },
       "additionalProperties": false

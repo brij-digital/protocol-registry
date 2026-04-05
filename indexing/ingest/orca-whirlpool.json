@@ -1,5 +1,5 @@
 {
-  "$schema": "/schemas/declarative_decoder_runtime.schema.v1.json",
+  "$schema": "/idl/declarative_decoder_runtime.schema.v1.json",
   "schema": "declarative-decoder-runtime.v1",
   "version": "0.1.0",
   "protocolId": "orca-whirlpool-mainnet",
@@ -9,7 +9,7 @@
     "orca_whirlpool": {
       "kind": "generated_idl_decoder",
       "family": "codama",
-      "codamaPath": "/codama/orca-whirlpool.json",
+      "codamaPath": "/idl/orca_whirlpool.codama.json",
       "artifact": "orca_whirlpool"
     }
   },
@@ -55,13 +55,33 @@
         "slot": "$update.slot",
         "observedAt": "$update.eventTime"
       },
+      "resolve": [
+        {
+          "name": "poolState",
+          "from": "indexed_idl_state",
+          "where": {
+            "protocol_id": "$protocolId",
+            "record_name": "Whirlpool",
+            "resource_id": "$ctx.pool"
+          },
+          "fields": [
+            "tokenMintA",
+            "tokenMintB",
+            "tokenDecimalsA",
+            "tokenDecimalsB"
+          ],
+          "optional": true
+        }
+      ],
       "compute": [
         {
-          "name": "side",
-          "compute": "logic.if",
-          "condition": "$ctx.aToB",
-          "then": "a_to_b",
-          "else": "b_to_a"
+          "ref": "logic.if_then_else",
+          "inputs": {
+            "condition": "$ctx.aToB",
+            "then_value": "a_to_b",
+            "else_value": "b_to_a"
+          },
+          "output": "side"
         }
       ],
       "emit": {
@@ -86,6 +106,10 @@
             "outputTransferFeeAtomic": "$ctx.outputTransferFeeAtomic",
             "preSqrtPrice": "$ctx.preSqrtPrice",
             "postSqrtPrice": "$ctx.postSqrtPrice",
+            "tokenMintA": "$poolState.tokenMintA",
+            "tokenMintB": "$poolState.tokenMintB",
+            "tokenDecimalsA": "$poolState.tokenDecimalsA",
+            "tokenDecimalsB": "$poolState.tokenDecimalsB",
             "lpFeeAtomic": "$ctx.lpFeeAtomic",
             "protocolFeeAtomic": "$ctx.protocolFeeAtomic",
             "signature": "$ctx.signature",
@@ -112,8 +136,62 @@
             "outputTransferFeeAtomic": "$ctx.outputTransferFeeAtomic",
             "preSqrtPrice": "$ctx.preSqrtPrice",
             "postSqrtPrice": "$ctx.postSqrtPrice",
+            "tokenMintA": "$poolState.tokenMintA",
+            "tokenMintB": "$poolState.tokenMintB",
+            "tokenDecimalsA": "$poolState.tokenDecimalsA",
+            "tokenDecimalsB": "$poolState.tokenDecimalsB",
             "lpFeeAtomic": "$ctx.lpFeeAtomic",
             "protocolFeeAtomic": "$ctx.protocolFeeAtomic",
+            "observedAt": "$ctx.observedAt"
+          }
+        }
+      }
+    },
+    "whirlpool_snapshot": {
+      "extract": {
+        "pool": "$update.pubkey",
+        "marketType": "whirlpool",
+        "tokenMintA": "$decoded.token_mint_a",
+        "tokenMintB": "$decoded.token_mint_b",
+        "tokenVaultA": "$decoded.token_vault_a",
+        "tokenVaultB": "$decoded.token_vault_b",
+        "tickSpacing": "$decoded.tick_spacing",
+        "feeRateRaw": "$decoded.fee_rate",
+        "liquidity": "$decoded.liquidity",
+        "tickCurrentIndex": "$decoded.tick_current_index",
+        "sqrtPrice": "$decoded.sqrt_price",
+        "observedAt": "$update.eventTime"
+      },
+      "compute": [
+        {
+          "ref": "math.safe_div",
+          "inputs": {
+            "dividend": "$ctx.feeRateRaw",
+            "divisor": 100
+          },
+          "output": "feeRateBps"
+        }
+      ],
+      "emit": {
+        "state": {
+          "recordKind": "account",
+          "recordName": "Whirlpool",
+          "subjectId": "$ctx.pool",
+          "resourceId": "$ctx.pool",
+          "eventTime": "$ctx.observedAt",
+          "payload": {
+            "pool": "$ctx.pool",
+            "marketType": "$ctx.marketType",
+            "tokenMintA": "$ctx.tokenMintA",
+            "tokenMintB": "$ctx.tokenMintB",
+            "tokenVaultA": "$ctx.tokenVaultA",
+            "tokenVaultB": "$ctx.tokenVaultB",
+            "tickSpacing": "$ctx.tickSpacing",
+            "feeRateRaw": "$ctx.feeRateRaw",
+            "feeRateBps": "$feeRateBps",
+            "liquidity": "$ctx.liquidity",
+            "tickCurrentIndex": "$ctx.tickCurrentIndex",
+            "sqrtPrice": "$ctx.sqrtPrice",
             "observedAt": "$ctx.observedAt"
           }
         }
