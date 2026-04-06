@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Entity Schema v1",
+  "type": "object",
+  "required": ["protocolId", "entities"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "protocolId": { "type": "string" },
+    "version": { "type": "string" },
+    "entities": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["source", "id", "fields"],
+        "properties": {
+          "source": { "enum": ["state", "record"] },
+          "recordKind": { "type": "string" },
+          "recordName": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" } }
+            ]
+          },
+          "id": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+            ]
+          },
+          "timeField": { "type": "string" },
+          "defaultOrderBy": { "type": "array", "items": { "type": "string" } },
+          "fields": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": { "type": "string" },
+                "primaryKey": { "type": "boolean" },
+                "filterable": { "type": "boolean" },
+                "sourceField": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

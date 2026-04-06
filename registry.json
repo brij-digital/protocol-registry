@@ -32,6 +32,7 @@
       "codamaIdlPath": "/codama/orca-whirlpool.json",
       "agentRuntimePath": "/runtime/orca-whirlpool.json",
       "ingestSpecPath": "/indexing/ingest/orca-whirlpool.json",
+      "entitySchemaPath": "/indexing/entities/orca-whirlpool-mainnet.json",
       "indexedReadsPath": "/indexing/indexed-reads/orca-whirlpool.json",
       "transport": "local-orca-whirlpool",
       "supportedCommands": [
@@ -74,6 +75,7 @@
       "codamaIdlPath": "/codama/pump-amm.json",
       "agentRuntimePath": "/runtime/pump-amm.json",
       "ingestSpecPath": "/indexing/ingest/pump-amm.json",
+      "entitySchemaPath": "/indexing/entities/pump-amm-mainnet.json",
       "indexedReadsPath": "/indexing/indexed-reads/pump-amm.json",
       "transport": "local-pump-amm",
       "supportedCommands": [
@@ -89,6 +91,7 @@
       "codamaIdlPath": "/codama/pump-core.json",
       "agentRuntimePath": "/runtime/pump-core.json",
       "ingestSpecPath": "/indexing/ingest/pump-core.json",
+      "entitySchemaPath": "/indexing/entities/pump-core-mainnet.json",
       "indexedReadsPath": "/indexing/indexed-reads/pump-core.json",
       "transport": "local-pump-core",
       "supportedCommands": [
