@@ -33,6 +33,11 @@
       },
       "emit": {
         "id": "pool",
+        "indexes": [
+          ["tokenMintA", "updatedAt:desc"],
+          ["tokenMintB", "updatedAt:desc"],
+          ["liquidity:desc", "updatedAt:desc"]
+        ],
         "timeField": "updatedAt",
         "defaultOrderBy": ["liquidity:desc", "updatedAt:desc"],
         "fields": {
@@ -83,6 +88,10 @@
       },
       "emit": {
         "id": "recordId",
+        "indexes": [
+          ["pool", "eventTime:desc"],
+          ["trader", "eventTime:desc"]
+        ],
         "timeField": "eventTime",
         "defaultOrderBy": ["eventTime:desc"],
         "fields": {

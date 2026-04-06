@@ -88,6 +88,14 @@
                   { "type": "array", "items": { "type": "string" }, "minItems": 1 }
                 ]
               },
+              "indexes": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "type": "string" }
+                }
+              },
               "timeField": { "type": "string" },
               "defaultOrderBy": { "type": "array", "items": { "type": "string" } },
               "fields": {

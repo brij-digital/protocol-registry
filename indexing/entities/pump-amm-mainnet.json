@@ -26,6 +26,10 @@
       },
       "emit": {
         "id": "pool",
+        "indexes": [
+          ["mint", "updatedAt:desc"],
+          ["quoteMint", "updatedAt:desc"]
+        ],
         "timeField": "updatedAt",
         "defaultOrderBy": ["updatedAt:desc"],
         "fields": {
@@ -65,6 +69,10 @@
       },
       "emit": {
         "id": "recordId",
+        "indexes": [
+          ["pool", "eventTime:desc"],
+          ["participant", "eventTime:desc"]
+        ],
         "timeField": "eventTime",
         "defaultOrderBy": ["eventTime:desc"],
         "fields": {
@@ -125,6 +133,9 @@
       },
       "emit": {
         "id": ["pool", "bucketStart"],
+        "indexes": [
+          ["pool", "bucketStart:desc"]
+        ],
         "timeField": "bucketStart",
         "defaultOrderBy": ["bucketStart:desc"],
         "fields": {
