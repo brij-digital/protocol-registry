@@ -31,7 +31,6 @@
       "programId": "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc",
       "codamaIdlPath": "/codama/orca-whirlpool.json",
       "agentRuntimePath": "/runtime/orca-whirlpool.json",
-      "ingestSpecPath": "/indexing/ingest/orca-whirlpool.json",
       "indexedReadsPath": "/indexing/indexed-reads/orca-whirlpool.json",
       "transport": "local-orca-whirlpool",
       "supportedCommands": [
@@ -73,7 +72,6 @@
       "programId": "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA",
       "codamaIdlPath": "/codama/pump-amm.json",
       "agentRuntimePath": "/runtime/pump-amm.json",
-      "ingestSpecPath": "/indexing/ingest/pump-amm.json",
       "indexedReadsPath": "/indexing/indexed-reads/pump-amm.json",
       "transport": "local-pump-amm",
       "supportedCommands": [
@@ -88,7 +86,6 @@
       "programId": "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
       "codamaIdlPath": "/codama/pump-core.json",
       "agentRuntimePath": "/runtime/pump-core.json",
-      "ingestSpecPath": "/indexing/ingest/pump-core.json",
       "indexedReadsPath": "/indexing/indexed-reads/pump-core.json",
       "transport": "local-pump-core",
       "supportedCommands": [
@@ -103,7 +100,6 @@
       "programId": "MarBmsSgKXdrN1egZf5sqe1TMai9K1rChYNDJgjq7aD",
       "codamaIdlPath": "/codama/marinade.json",
       "agentRuntimePath": "/runtime/marinade.json",
-      "ingestSpecPath": null,
       "indexedReadsPath": null,
       "transport": "local",
       "supportedCommands": [],
@@ -116,7 +112,6 @@
       "programId": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
       "codamaIdlPath": "/codama/meteora-dlmm.json",
       "agentRuntimePath": "/runtime/meteora-dlmm.json",
-      "ingestSpecPath": null,
       "indexedReadsPath": null,
       "transport": "local",
       "supportedCommands": [],
@@ -129,7 +124,6 @@
       "programId": "stkitrT1Uoy18Dk1fTrgPw8W6MVzoCfYoAFT4MLsmhq",
       "codamaIdlPath": "/codama/sanctum.json",
       "agentRuntimePath": "/runtime/sanctum.json",
-      "ingestSpecPath": null,
       "indexedReadsPath": null,
       "transport": "local",
       "supportedCommands": [],
