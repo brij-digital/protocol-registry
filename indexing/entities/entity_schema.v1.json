@@ -47,7 +47,16 @@
               "compute": {
                 "type": "array",
                 "items": {
-                  "type": "object"
+                  "type": "object",
+                  "required": ["ref", "inputs", "output"],
+                  "properties": {
+                    "ref": { "type": "string" },
+                    "inputs": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "output": { "type": "string" }
+                  }
                 }
               },
               "groupBy": {

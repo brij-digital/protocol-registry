@@ -96,10 +96,12 @@
         },
         "compute": [
           {
-            "name": "bucketStart",
-            "compute": "time.bucket",
-            "value": "$ctx.eventTime",
-            "interval": "1m"
+            "ref": "time.bucket",
+            "inputs": {
+              "value": "$ctx.eventTime",
+              "interval": "1m"
+            },
+            "output": "bucketStart"
           }
         ],
         "groupBy": ["pool", "bucketStart"],
