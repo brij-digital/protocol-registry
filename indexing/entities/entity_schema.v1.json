@@ -2,10 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Entity Schema v1",
   "type": "object",
-  "required": ["protocolId", "entities"],
+  "required": ["protocolId", "indexingId", "entities"],
   "properties": {
     "$schema": { "type": "string" },
     "protocolId": { "type": "string" },
+    "indexingId": { "type": "string" },
     "version": { "type": "string" },
     "entities": {
       "type": "object",
