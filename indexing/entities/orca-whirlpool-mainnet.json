@@ -1,7 +1,7 @@
 {
   "$schema": "/indexing/entities/entity_schema.v1.json",
-  "protocolId": "orca-whirlpool-mainnet",
   "indexingId": "orca-whirlpool-mainnet",
+  "sourceProtocolIds": ["orca-whirlpool-mainnet"],
   "version": "0.1.0",
   "entities": {
     "Pool": {
