@@ -139,19 +139,37 @@
   "indexings": [
     {
       "id": "orca-whirlpool-mainnet",
-      "protocolIds": ["orca-whirlpool-mainnet"],
+      "sources": [
+        {
+          "id": "orca-whirlpool",
+          "protocolId": "orca-whirlpool-mainnet",
+          "ingestSpecPath": "/indexing/ingest/orca-whirlpool.json"
+        }
+      ],
       "entitySchemaPath": "/indexing/entities/orca-whirlpool-mainnet.json",
       "status": "active"
     },
     {
       "id": "pump-amm-mainnet",
-      "protocolIds": ["pump-amm-mainnet"],
+      "sources": [
+        {
+          "id": "pump-amm",
+          "protocolId": "pump-amm-mainnet",
+          "ingestSpecPath": "/indexing/ingest/pump-amm.json"
+        }
+      ],
       "entitySchemaPath": "/indexing/entities/pump-amm-mainnet.json",
       "status": "active"
     },
     {
       "id": "pump-core-mainnet",
-      "protocolIds": ["pump-core-mainnet"],
+      "sources": [
+        {
+          "id": "pump-core",
+          "protocolId": "pump-core-mainnet",
+          "ingestSpecPath": "/indexing/ingest/pump-core.json"
+        }
+      ],
       "entitySchemaPath": "/indexing/entities/pump-core-mainnet.json",
       "status": "active"
     }

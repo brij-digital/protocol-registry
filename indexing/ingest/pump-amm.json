@@ -2,7 +2,7 @@
   "$schema": "/schemas/declarative_decoder_runtime.schema.v1.json",
   "schema": "declarative-decoder-runtime.v1",
   "version": "0.1.0",
-  "protocolId": "pump-amm-mainnet",
+  "sourceProtocolIds": ["pump-amm-mainnet"],
   "label": "Pump AMM Declarative Runtime",
   "programId": "$protocol.programId",
   "decoderArtifacts": {

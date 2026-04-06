@@ -2,7 +2,7 @@
   "$schema": "/schemas/declarative_decoder_runtime.schema.v1.json",
   "schema": "declarative-decoder-runtime.v1",
   "version": "0.1.0",
-  "protocolId": "orca-whirlpool-mainnet",
+  "sourceProtocolIds": ["orca-whirlpool-mainnet"],
   "label": "Orca Whirlpool Declarative Runtime",
   "programId": "$protocol.programId",
   "decoderArtifacts": {
