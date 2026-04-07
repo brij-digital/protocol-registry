@@ -31,7 +31,6 @@
       "programId": "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc",
       "codamaIdlPath": "/codama/orca-whirlpool.json",
       "agentRuntimePath": "/runtime/orca-whirlpool.json",
-      "indexedReadsPath": "/indexing/indexed-reads/orca-whirlpool.json",
       "transport": "local-orca-whirlpool",
       "supportedCommands": [
         "/orca-list-pools",
@@ -72,7 +71,6 @@
       "programId": "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA",
       "codamaIdlPath": "/codama/pump-amm.json",
       "agentRuntimePath": "/runtime/pump-amm.json",
-      "indexedReadsPath": "/indexing/indexed-reads/pump-amm.json",
       "transport": "local-pump-amm",
       "supportedCommands": [
         "/pump-amm"
@@ -86,7 +84,6 @@
       "programId": "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
       "codamaIdlPath": "/codama/pump-core.json",
       "agentRuntimePath": "/runtime/pump-core.json",
-      "indexedReadsPath": "/indexing/indexed-reads/pump-core.json",
       "transport": "local-pump-core",
       "supportedCommands": [
         "/pump-curve"
@@ -100,7 +97,6 @@
       "programId": "MarBmsSgKXdrN1egZf5sqe1TMai9K1rChYNDJgjq7aD",
       "codamaIdlPath": "/codama/marinade.json",
       "agentRuntimePath": "/runtime/marinade.json",
-      "indexedReadsPath": null,
       "transport": "local",
       "supportedCommands": [],
       "status": "active"
@@ -112,7 +108,6 @@
       "programId": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
       "codamaIdlPath": "/codama/meteora-dlmm.json",
       "agentRuntimePath": "/runtime/meteora-dlmm.json",
-      "indexedReadsPath": null,
       "transport": "local",
       "supportedCommands": [],
       "status": "active"
@@ -124,7 +119,6 @@
       "programId": "stkitrT1Uoy18Dk1fTrgPw8W6MVzoCfYoAFT4MLsmhq",
       "codamaIdlPath": "/codama/sanctum.json",
       "agentRuntimePath": "/runtime/sanctum.json",
-      "indexedReadsPath": null,
       "transport": "local",
       "supportedCommands": [],
       "status": "active"

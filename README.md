@@ -18,7 +18,6 @@ It stores the protocol metadata and JSON specs consumed by the other repos in th
 - `codama/`: codama/IDL source files
 - `indexing/ingest/`: canonical ingest specs
 - `indexing/entities/`: canonical entity projection specs for `protocol-indexing`
-- `indexing/indexed-reads/`: older indexed-read specs still retained for compatibility
 - `action-runners/`: action-runner registry; currently empty
 
 ## Canonical Model
@@ -37,8 +36,6 @@ It stores the protocol metadata and JSON specs consumed by the other repos in th
 For indexing, the canonical path is now:
 - `indexings[].sources[].ingestSpecPath`
 - `indexings[].entitySchemaPath`
-
-`protocols[].indexedReadsPath` still exists for some legacy consumers, but it is no longer the primary indexing model.
 
 ## Current Indexings
 
