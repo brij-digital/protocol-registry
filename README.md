@@ -1,46 +1,80 @@
 # Protocol Registry
 
-Source of truth for all AppPack protocol specs.
+Canonical spec registry for AppPACK.
 
-## Structure
+This repo is intentionally a data/spec repository:
+- no runtime service
+- no build system
+- no npm toolchain
+- no generated dependency artifacts
 
-```
-registry.json              # Master registry — lists all protocols and paths
-schemas/                   # Shared JSON schemas (owned by apppack-runtime)
-runtime/                   # Agent runtime specs (writes, views, transforms)
-codama/                    # Codama IDLs (on-chain program descriptions)
-indexing/
-  ingest/                  # Ingest specs (Carbon pipeline definitions)
-  indexed-reads/           # Indexed read specs (query projections)
-action-runners/            # Multi-step action runner specs
-```
+It stores the protocol metadata and JSON specs consumed by the other repos in this workspace.
 
-## Protocols
+## What Lives Here
 
-| Protocol | Swap | LP | Quotes | Indexing |
-|---|---|---|---|---|
-| **Orca Whirlpool** | ✅ swap, two-hop | ✅ open, close, increase, decrease | ✅ exact-in, exact-out, LP quotes | ✅ trades, snapshots |
-| **Pump AMM** | ✅ buy, sell | — | ✅ preview buy/sell | ✅ trades, snapshots |
-| **Pump Core** | ✅ buy | — | ✅ preview buy | ✅ trades, curves |
+- `registry.json`: canonical top-level registry
+- `schemas/`: shared JSON schemas
+- `runtime/`: Solana agent runtime specs for reads, writes, and reusable transforms
+- `codama/`: codama/IDL source files
+- `indexing/ingest/`: canonical ingest specs
+- `indexing/entities/`: canonical entity projection specs for `protocol-indexing`
+- `indexing/indexed-reads/`: older indexed-read specs still retained for compatibility
+- `action-runners/`: action-runner registry; currently empty
 
-## How It Works
+## Canonical Model
 
-- **Agents** load protocol packs from this registry to execute operations locally
-- **View service** syncs indexing specs for Carbon ingestion and query projections
-- **Wallet** syncs specs for the browser UI
-- **Conformance tests** validate spec correctness against official SDKs
+`registry.json` currently carries two main top-level catalogs:
 
-## Adding a Protocol
+- `protocols[]`
+  - canonical protocol metadata
+  - runtime pack location via `agentRuntimePath`
+  - codama location via `codamaIdlPath`
+- `indexings[]`
+  - canonical indexing definitions
+  - source list via `sources[]`
+  - entity projection spec via `entitySchemaPath`
 
-1. Add Codama IDL to `codama/`
-2. Author runtime spec in `runtime/`
-3. Author ingest + indexed-reads specs in `indexing/`
-4. Add entry to `registry.json`
-5. Add conformance tests to `protocol-conformance` repo
+For indexing, the canonical path is now:
+- `indexings[].sources[].ingestSpecPath`
+- `indexings[].entitySchemaPath`
+
+`protocols[].indexedReadsPath` still exists for some legacy consumers, but it is no longer the primary indexing model.
+
+## Current Indexings
+
+The active canonical indexings today are:
+- `orca-whirlpool-mainnet`
+- `pump-amm-mainnet`
+- `pump-core-mainnet`
+
+Their specs live under:
+- `indexing/ingest/`
+- `indexing/entities/`
 
 ## Consumers
 
-All repos sync from this registry:
-- `ec-ai-wallet` — syncs to `public/idl/`
-- `apppack-view-service` — syncs to `idl/`
-- `protocol-conformance` — reads directly via registry path
+This repo is consumed by:
+- `protocol-runtime` for runtime packs and schema-driven execution
+- `protocol-indexing` for ingest specs and entity projection specs
+- `protocol-ui` for synced public protocol artifacts
+- `protocol-conformance` for parity and registry-backed conformance tests
+
+Validation and execution happen in those consuming repos, not here.
+
+## Adding Or Updating Specs
+
+Typical flow:
+
+1. Add or update the codama file under `codama/`.
+2. Add or update the runtime pack under `runtime/`.
+3. If the protocol is indexed, add or update:
+   - ingest spec under `indexing/ingest/`
+   - entity spec under `indexing/entities/`
+4. Register the protocol and/or indexing in `registry.json`.
+5. Prove the change in `protocol-conformance` when relevant.
+
+## Notes
+
+- This repo should stay boring and lightweight.
+- Do not commit `node_modules`, generated artifacts, or local tooling state here.
+- If spec validation tooling is needed, it should live in a consumer repo or CI, not by turning this repo back into a pseudo-application.
