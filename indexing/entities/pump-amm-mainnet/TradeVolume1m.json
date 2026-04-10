@@ -1,0 +1,59 @@
+{
+  "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "source": {
+    "from": "record",
+    "recordKind": "event",
+    "recordName": ["BuyEvent", "SellEvent"]
+  },
+  "transform": {
+    "extract": {
+      "pool": "$raw.subject_id",
+      "quoteAmountAtomic": "$payload.quoteAmountAtomic",
+      "eventTime": "$raw.event_time"
+    },
+    "compute": [
+      {
+        "ref": "time.bucket",
+        "inputs": {
+          "value": "$ctx.eventTime",
+          "interval": "1m"
+        },
+        "output": "bucketStart"
+      }
+    ],
+    "groupBy": ["pool", "bucketStart"],
+    "reduce": {
+      "volumeQuoteAtomic": {
+        "op": "sum",
+        "value": "$ctx.quoteAmountAtomic"
+      },
+      "tradeCount": {
+        "op": "count"
+      },
+      "firstEventTime": {
+        "op": "min",
+        "value": "$ctx.eventTime"
+      },
+      "lastEventTime": {
+        "op": "max",
+        "value": "$ctx.eventTime"
+      }
+    }
+  },
+  "emit": {
+    "id": ["pool", "bucketStart"],
+    "indexes": [
+      ["pool", "bucketStart:desc"]
+    ],
+    "timeField": "bucketStart",
+    "defaultOrderBy": ["bucketStart:desc"],
+    "fields": {
+      "pool": { "type": "TEXT", "primaryKey": true, "filterable": true },
+      "bucketStart": { "type": "TIMESTAMPTZ", "primaryKey": true, "filterable": true },
+      "volumeQuoteAtomic": { "type": "NUMERIC" },
+      "tradeCount": { "type": "BIGINT" },
+      "firstEventTime": { "type": "TIMESTAMPTZ" },
+      "lastEventTime": { "type": "TIMESTAMPTZ" }
+    }
+  }
+}

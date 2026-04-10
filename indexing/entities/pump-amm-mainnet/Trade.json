@@ -1,0 +1,45 @@
+{
+  "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "source": {
+    "from": "record",
+    "recordKind": "event",
+    "recordName": ["BuyEvent", "SellEvent"]
+  },
+  "transform": {
+    "extract": {
+      "recordId": "$raw.record_id",
+      "signature": "$raw.signature",
+      "pool": "$raw.subject_id",
+      "participant": "$payload.participant",
+      "side": "$payload.side",
+      "baseAmountAtomic": "$payload.baseAmountAtomic",
+      "quoteAmountAtomic": "$payload.quoteAmountAtomic",
+      "poolBaseReservesAtomic": "$payload.poolBaseReservesAtomic",
+      "poolQuoteReservesAtomic": "$payload.poolQuoteReservesAtomic",
+      "coinCreator": "$payload.coinCreator",
+      "eventTime": "$raw.event_time"
+    }
+  },
+  "emit": {
+    "id": "recordId",
+    "indexes": [
+      ["pool", "eventTime:desc"],
+      ["participant", "eventTime:desc"]
+    ],
+    "timeField": "eventTime",
+    "defaultOrderBy": ["eventTime:desc"],
+    "fields": {
+      "recordId": { "type": "TEXT", "primaryKey": true, "filterable": true },
+      "signature": { "type": "TEXT", "filterable": true },
+      "pool": { "type": "TEXT", "filterable": true },
+      "participant": { "type": "TEXT", "filterable": true },
+      "side": { "type": "TEXT" },
+      "baseAmountAtomic": { "type": "NUMERIC" },
+      "quoteAmountAtomic": { "type": "NUMERIC" },
+      "poolBaseReservesAtomic": { "type": "NUMERIC" },
+      "poolQuoteReservesAtomic": { "type": "NUMERIC" },
+      "coinCreator": { "type": "TEXT" },
+      "eventTime": { "type": "TIMESTAMPTZ", "filterable": true }
+    }
+  }
+}

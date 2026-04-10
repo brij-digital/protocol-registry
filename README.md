@@ -31,11 +31,14 @@ It stores the protocol metadata and JSON specs consumed by the other repos in th
 - `indexings[]`
   - canonical indexing definitions
   - source list via `sources[]`
-  - entity projection spec via `entitySchemaPath`
+  - entity projection directory via `entitySchemaPath`
 
 For indexing, the canonical path is now:
 - `indexings[].sources[].ingestSpecPath`
 - `indexings[].entitySchemaPath`
+
+`entitySchemaPath` now points directly to `indexing/entities/<indexingId>/`.
+Consumers scan that directory and merge one file per entity.
 
 ## Current Indexings
 
@@ -47,6 +50,9 @@ The active canonical indexings today are:
 Their specs live under:
 - `indexing/ingest/`
 - `indexing/entities/`
+
+Entity authoring layout:
+- `indexing/entities/<indexingId>/<EntityName>.json`
 
 ## Consumers
 
@@ -66,7 +72,7 @@ Typical flow:
 2. Add or update the runtime pack under `runtime/`.
 3. If the protocol is indexed, add or update:
    - ingest spec under `indexing/ingest/`
-   - entity spec under `indexing/entities/`
+   - entity shards under `indexing/entities/`
 4. Register the protocol and/or indexing in `registry.json`.
 5. Prove the change in `protocol-conformance` when relevant.
 

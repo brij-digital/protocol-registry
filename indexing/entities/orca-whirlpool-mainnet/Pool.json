@@ -1,0 +1,58 @@
+{
+  "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "source": {
+    "from": "state",
+    "recordKind": "account",
+    "recordName": "Whirlpool"
+  },
+  "transform": {
+    "extract": {
+      "subjectId": "$raw.subject_id",
+      "resourceId": "$raw.resource_id",
+      "pool": "$raw.subject_id",
+      "marketType": "$state.marketType",
+      "tokenMintA": "$state.tokenMintA",
+      "tokenMintB": "$state.tokenMintB",
+      "tokenVaultA": "$state.tokenVaultA",
+      "tokenVaultB": "$state.tokenVaultB",
+      "tickSpacing": "$state.tickSpacing",
+      "feeRateRaw": "$state.feeRateRaw",
+      "feeRateBps": "$state.feeRateBps",
+      "liquidity": "$state.liquidity",
+      "tickCurrentIndex": "$state.tickCurrentIndex",
+      "sqrtPrice": "$state.sqrtPrice",
+      "observedAt": "$state.observedAt",
+      "updatedAt": "$raw.updated_at",
+      "lastEventTime": "$raw.last_event_time"
+    }
+  },
+  "emit": {
+    "id": "pool",
+    "indexes": [
+      ["tokenMintA", "updatedAt:desc"],
+      ["tokenMintB", "updatedAt:desc"],
+      ["liquidity:desc", "updatedAt:desc"]
+    ],
+    "timeField": "updatedAt",
+    "defaultOrderBy": ["liquidity:desc", "updatedAt:desc"],
+    "fields": {
+      "subjectId": { "type": "TEXT", "filterable": true },
+      "resourceId": { "type": "TEXT" },
+      "pool": { "type": "TEXT", "primaryKey": true, "filterable": true },
+      "marketType": { "type": "TEXT" },
+      "tokenMintA": { "type": "TEXT", "filterable": true },
+      "tokenMintB": { "type": "TEXT", "filterable": true },
+      "tokenVaultA": { "type": "TEXT" },
+      "tokenVaultB": { "type": "TEXT" },
+      "tickSpacing": { "type": "INTEGER" },
+      "feeRateRaw": { "type": "INTEGER" },
+      "feeRateBps": { "type": "NUMERIC" },
+      "liquidity": { "type": "NUMERIC", "filterable": true },
+      "tickCurrentIndex": { "type": "INTEGER" },
+      "sqrtPrice": { "type": "NUMERIC" },
+      "observedAt": { "type": "TIMESTAMPTZ", "filterable": true },
+      "updatedAt": { "type": "TIMESTAMPTZ", "filterable": true },
+      "lastEventTime": { "type": "TIMESTAMPTZ" }
+    }
+  }
+}

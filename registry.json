@@ -134,7 +134,7 @@
           "ingestSpecPath": "/indexing/ingest/orca-whirlpool.json"
         }
       ],
-      "entitySchemaPath": "/indexing/entities/orca-whirlpool-mainnet.json",
+      "entitySchemaPath": "/indexing/entities/orca-whirlpool-mainnet",
       "status": "active"
     },
     {
@@ -146,7 +146,7 @@
           "ingestSpecPath": "/indexing/ingest/pump-amm.json"
         }
       ],
-      "entitySchemaPath": "/indexing/entities/pump-amm-mainnet.json",
+      "entitySchemaPath": "/indexing/entities/pump-amm-mainnet",
       "status": "active"
     },
     {
@@ -158,7 +158,7 @@
           "ingestSpecPath": "/indexing/ingest/pump-core.json"
         }
       ],
-      "entitySchemaPath": "/indexing/entities/pump-core-mainnet.json",
+      "entitySchemaPath": "/indexing/entities/pump-core-mainnet",
       "status": "active"
     }
   ]

@@ -1,0 +1,43 @@
+{
+  "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "source": {
+    "from": "state",
+    "recordKind": "account",
+    "recordName": "PoolMetadata"
+  },
+  "transform": {
+    "extract": {
+      "pool": "$raw.subject_id",
+      "mint": "$state.mint",
+      "quoteMint": "$state.quoteMint",
+      "baseDecimals": "$state.baseDecimals",
+      "quoteDecimals": "$state.quoteDecimals",
+      "coinCreator": "$state.coinCreator",
+      "isCashbackCoin": "$state.isCashbackCoin",
+      "observedAt": "$state.observedAt",
+      "updatedAt": "$raw.updated_at",
+      "poolQuoteReservesAtomic": "$state.poolQuoteReservesAtomic"
+    }
+  },
+  "emit": {
+    "id": "pool",
+    "indexes": [
+      ["mint", "updatedAt:desc"],
+      ["quoteMint", "updatedAt:desc"]
+    ],
+    "timeField": "updatedAt",
+    "defaultOrderBy": ["updatedAt:desc"],
+    "fields": {
+      "mint": { "type": "TEXT", "filterable": true },
+      "pool": { "type": "TEXT", "primaryKey": true, "filterable": true },
+      "quoteMint": { "type": "TEXT", "filterable": true },
+      "baseDecimals": { "type": "INTEGER" },
+      "quoteDecimals": { "type": "INTEGER" },
+      "coinCreator": { "type": "TEXT" },
+      "isCashbackCoin": { "type": "BOOLEAN" },
+      "observedAt": { "type": "TIMESTAMPTZ", "filterable": true },
+      "updatedAt": { "type": "TIMESTAMPTZ", "filterable": true },
+      "poolQuoteReservesAtomic": { "type": "NUMERIC" }
+    }
+  }
+}
