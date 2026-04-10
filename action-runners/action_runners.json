@@ -1,4 +1,33 @@
 {
   "schema": "solana-action-runner-registry.v1",
-  "runners": []
+  "runners": [
+    {
+      "actionId": "orca.collect_fees",
+      "path": "/action-runners/orca.collect_fees.runner.json"
+    },
+    {
+      "actionId": "orca.collect_reward",
+      "path": "/action-runners/orca.collect_reward.runner.json"
+    },
+    {
+      "actionId": "orca.quote_and_decrease_liquidity",
+      "path": "/action-runners/orca.quote_and_decrease_liquidity.runner.json"
+    },
+    {
+      "actionId": "orca.quote_and_swap_exact_in",
+      "path": "/action-runners/orca.quote_and_swap_exact_in.runner.json"
+    },
+    {
+      "actionId": "orca.quote_and_swap_exact_out",
+      "path": "/action-runners/orca.quote_and_swap_exact_out.runner.json"
+    },
+    {
+      "actionId": "orca.quote_and_two_hop_swap_exact_in",
+      "path": "/action-runners/orca.quote_and_two_hop_swap_exact_in.runner.json"
+    },
+    {
+      "actionId": "orca.quote_increase_liquidity",
+      "path": "/action-runners/orca.quote_increase_liquidity.runner.json"
+    }
+  ]
 }
