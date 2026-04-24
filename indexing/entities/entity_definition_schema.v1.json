@@ -32,6 +32,35 @@
           "type": "object",
           "additionalProperties": true
         },
+        "resolve": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "from", "recordName"],
+            "properties": {
+              "name": { "type": "string" },
+              "from": { "enum": ["state", "record"] },
+              "recordKind": { "type": "string" },
+              "sourceProtocolIds": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string" }
+              },
+              "recordName": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+                ]
+              },
+              "where": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "optional": { "type": "boolean" }
+            },
+            "additionalProperties": false
+          }
+        },
         "compute": {
           "type": "array",
           "items": {
