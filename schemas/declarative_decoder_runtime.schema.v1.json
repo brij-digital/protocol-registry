@@ -444,7 +444,7 @@
     },
     "recordEmitSpec": {
       "type": "object",
-      "required": ["recordKind", "recordName", "subjectId", "payload"],
+      "required": ["recordKind", "recordName", "subjectId", "payload", "retention"],
       "properties": {
         "recordKind": {
           "type": "string"
@@ -482,7 +482,7 @@
     },
     "stateEmitSpec": {
       "type": "object",
-      "required": ["recordKind", "recordName", "subjectId", "payload"],
+      "required": ["recordKind", "recordName", "subjectId", "payload", "retention"],
       "properties": {
         "recordKind": {
           "type": "string"

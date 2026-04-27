@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Entity Definition Schema v1",
   "type": "object",
-  "required": ["source", "transform", "emit"],
+  "required": ["source", "transform", "emit", "retention"],
   "properties": {
     "$schema": { "type": "string" },
     "retention": {
@@ -44,7 +44,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["name", "from", "recordName"],
+            "required": ["name", "from", "recordName", "retention"],
             "properties": {
               "name": { "type": "string" },
               "from": { "enum": ["state", "record"] },
