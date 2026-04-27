@@ -1,0 +1,98 @@
+{
+  "schema": "solana-action-runner.v1",
+  "actionId": "orca.close_position_and_collect_all",
+  "title": "Orca Close Position and Collect All",
+  "description": "Quote a full liquidity withdrawal, then prepare the Orca decrease-liquidity, collect-fees, collect-rewards, and close-position instructions.",
+  "inputs": {
+    "position": {
+      "type": "pubkey",
+      "description": "Whirlpool position address."
+    },
+    "slippage_bps": {
+      "type": "u16",
+      "description": "Slippage tolerance in basis points for the full liquidity withdrawal.",
+      "default": "100"
+    }
+  },
+  "steps": [
+    {
+      "id": "quote",
+      "kind": "read",
+      "protocolId": "orca-whirlpool-mainnet",
+      "operationId": "quote_close_position",
+      "input": {
+        "position": "$input.position",
+        "slippage_bps": "$input.slippage_bps"
+      }
+    },
+    {
+      "id": "decrease_liquidity",
+      "kind": "write",
+      "protocolId": "orca-whirlpool-mainnet",
+      "operationId": "decrease_liquidity_v2",
+      "input": {
+        "position": "$input.position",
+        "liquidity_amount": "$quote.output.liquidity_amount",
+        "token_min_a": "$quote.output.token_min_a",
+        "token_min_b": "$quote.output.token_min_b"
+      }
+    },
+    {
+      "id": "collect_fees",
+      "kind": "write",
+      "protocolId": "orca-whirlpool-mainnet",
+      "operationId": "collect_fees_v2",
+      "input": {
+        "position": "$input.position"
+      }
+    },
+    {
+      "id": "collect_reward_0",
+      "kind": "write",
+      "protocolId": "orca-whirlpool-mainnet",
+      "operationId": "collect_reward_v2",
+      "when": "$quote.output.reward_0_active",
+      "input": {
+        "position": "$input.position",
+        "reward_index": 0
+      }
+    },
+    {
+      "id": "collect_reward_1",
+      "kind": "write",
+      "protocolId": "orca-whirlpool-mainnet",
+      "operationId": "collect_reward_v2",
+      "when": "$quote.output.reward_1_active",
+      "input": {
+        "position": "$input.position",
+        "reward_index": 1
+      }
+    },
+    {
+      "id": "collect_reward_2",
+      "kind": "write",
+      "protocolId": "orca-whirlpool-mainnet",
+      "operationId": "collect_reward_v2",
+      "when": "$quote.output.reward_2_active",
+      "input": {
+        "position": "$input.position",
+        "reward_index": 2
+      }
+    },
+    {
+      "id": "close_position",
+      "kind": "write",
+      "protocolId": "orca-whirlpool-mainnet",
+      "operationId": "close_position",
+      "input": {
+        "position": "$input.position"
+      }
+    }
+  ],
+  "output": {
+    "quote": "$quote.output",
+    "decreaseLiquidityDraft": "$decrease_liquidity.output",
+    "collectFeesDraft": "$collect_fees.output",
+    "closePositionDraft": "$close_position.output"
+  }
+}
