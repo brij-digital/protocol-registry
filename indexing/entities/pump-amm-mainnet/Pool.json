@@ -1,5 +1,6 @@
 {
   "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "retention": "30d",
   "source": {
     "from": "state",
     "recordKind": "account",

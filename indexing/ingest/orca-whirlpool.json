@@ -105,6 +105,7 @@
         "record": {
           "recordKind": "event",
           "recordName": "SwapEvent",
+          "retention": "8d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "participantId": "$ctx.trader",
@@ -137,6 +138,7 @@
         "state": {
           "recordKind": "state",
           "recordName": "WhirlpoolTradeState",
+          "retention": "30d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "signature": "$ctx.signature",
@@ -193,6 +195,7 @@
         "state": {
           "recordKind": "account",
           "recordName": "Whirlpool",
+          "retention": "90d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "eventTime": "$ctx.observedAt",
@@ -232,6 +235,7 @@
         "state": {
           "recordKind": "account",
           "recordName": "Position",
+          "retention": "90d",
           "subjectId": "$ctx.position",
           "resourceId": "$ctx.position",
           "eventTime": "$ctx.observedAt",

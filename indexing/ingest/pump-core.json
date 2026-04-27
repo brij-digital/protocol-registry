@@ -72,6 +72,7 @@
         "state": {
           "recordKind": "account",
           "recordName": "BondingCurveAccount",
+          "retention": "90d",
           "subjectId": "$ctx.bondingCurve",
           "resourceId": "$ctx.bondingCurve",
           "eventTime": "$ctx.observedAt",
@@ -120,6 +121,7 @@
         "state": {
           "recordKind": "state",
           "recordName": "BondingCurve",
+          "retention": "90d",
           "subjectId": "$ctx.mint",
           "resourceId": "$ctx.pool",
           "eventTime": "$ctx.observedAt",
@@ -187,6 +189,7 @@
         "record": {
           "recordKind": "event",
           "recordName": "TradeEvent",
+          "retention": "14d",
           "subjectId": "$ctx.mint",
           "resourceId": "$ctx.pool",
           "participantId": "$ctx.participant",
@@ -216,6 +219,7 @@
         "state": {
           "recordKind": "state",
           "recordName": "BondingCurve",
+          "retention": "90d",
           "subjectId": "$ctx.mint",
           "resourceId": "$ctx.pool",
           "signature": "$ctx.signature",

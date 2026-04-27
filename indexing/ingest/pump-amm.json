@@ -75,6 +75,7 @@
         "state": {
           "recordKind": "account",
           "recordName": "PoolMetadata",
+          "retention": "90d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "eventTime": "$ctx.observedAt",
@@ -103,6 +104,7 @@
         "state": {
           "recordKind": "state",
           "recordName": "PoolMetadata",
+          "retention": "90d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "eventTime": "$ctx.observedAt",
@@ -155,6 +157,7 @@
         "record": {
           "recordKind": "event",
           "recordName": "BuyEvent",
+          "retention": "14d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "participantId": "$ctx.participant",
@@ -182,6 +185,7 @@
         "state": {
           "recordKind": "state",
           "recordName": "Pool",
+          "retention": "90d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "signature": "$ctx.signature",
@@ -241,6 +245,7 @@
         "record": {
           "recordKind": "event",
           "recordName": "SellEvent",
+          "retention": "14d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "participantId": "$ctx.participant",
@@ -268,6 +273,7 @@
         "state": {
           "recordKind": "state",
           "recordName": "Pool",
+          "retention": "90d",
           "subjectId": "$ctx.pool",
           "resourceId": "$ctx.pool",
           "signature": "$ctx.signature",

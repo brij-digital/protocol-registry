@@ -81,6 +81,10 @@
         }
       ]
     },
+    "retentionWindowSpec": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*(s|m|h|d)$"
+    },
     "runtimeInputSpec": {
       "type": "object",
       "required": ["type"],
@@ -466,6 +470,9 @@
         "eventTime": {
           "$ref": "#/$defs/stringOrTemplate"
         },
+        "retention": {
+          "$ref": "#/$defs/retentionWindowSpec"
+        },
         "payload": {
           "type": "object",
           "additionalProperties": { "$ref": "#/$defs/stringOrTemplate" }
@@ -497,6 +504,9 @@
         },
         "eventTime": {
           "$ref": "#/$defs/stringOrTemplate"
+        },
+        "retention": {
+          "$ref": "#/$defs/retentionWindowSpec"
         },
         "payload": {
           "type": "object",

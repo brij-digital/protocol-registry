@@ -5,12 +5,20 @@
   "required": ["source", "transform", "emit"],
   "properties": {
     "$schema": { "type": "string" },
+    "retention": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*(s|m|h|d)$"
+    },
     "source": {
       "type": "object",
       "required": ["from", "recordName"],
       "properties": {
         "from": { "enum": ["state", "record"] },
         "recordKind": { "type": "string" },
+        "retention": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*(s|m|h|d)$"
+        },
         "sourceProtocolIds": {
           "type": "array",
           "minItems": 1,
@@ -41,6 +49,10 @@
               "name": { "type": "string" },
               "from": { "enum": ["state", "record"] },
               "recordKind": { "type": "string" },
+              "retention": {
+                "type": "string",
+                "pattern": "^[1-9][0-9]*(s|m|h|d)$"
+              },
               "sourceProtocolIds": {
                 "type": "array",
                 "minItems": 1,
