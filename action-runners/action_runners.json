@@ -10,10 +10,6 @@
       "path": "/action-runners/orca.collect_reward.runner.json"
     },
     {
-      "actionId": "orca.close_position_and_collect_all",
-      "path": "/action-runners/orca.close_position_and_collect_all.runner.json"
-    },
-    {
       "actionId": "orca.open_centered_position_with_liquidity",
       "path": "/action-runners/orca.open_centered_position_with_liquidity.runner.json"
     },
