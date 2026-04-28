@@ -44,7 +44,10 @@
         "output": "volumeTokenBAtomic"
       }
     ],
-    "groupBy": ["pool", "bucketStart"],
+    "groupBy": [
+      "pool",
+      "bucketStart"
+    ],
     "reduce": {
       "volumeTokenAAtomic": {
         "op": "sum",
@@ -76,22 +79,52 @@
     }
   },
   "emit": {
-    "id": ["pool", "bucketStart"],
+    "id": [
+      "pool",
+      "bucketStart"
+    ],
     "indexes": [
-      ["pool", "bucketStart:desc"]
+      [
+        "pool",
+        "bucketStart:desc"
+      ]
     ],
     "timeField": "bucketStart",
-    "defaultOrderBy": ["bucketStart:desc"],
+    "defaultOrderBy": [
+      "bucketStart:desc"
+    ],
     "fields": {
-      "pool": { "type": "TEXT", "primaryKey": true, "filterable": true },
-      "bucketStart": { "type": "TIMESTAMPTZ", "primaryKey": true, "filterable": true },
-      "volumeTokenAAtomic": { "type": "NUMERIC" },
-      "volumeTokenBAtomic": { "type": "NUMERIC" },
-      "lpFeeAtomic": { "type": "NUMERIC" },
-      "protocolFeeAtomic": { "type": "NUMERIC" },
-      "tradeCount": { "type": "BIGINT" },
-      "firstEventTime": { "type": "TIMESTAMPTZ" },
-      "lastEventTime": { "type": "TIMESTAMPTZ" }
+      "pool": {
+        "type": "TEXT",
+        "primaryKey": true,
+        "filterable": true
+      },
+      "bucketStart": {
+        "type": "TIMESTAMPTZ",
+        "primaryKey": true,
+        "filterable": true
+      },
+      "volumeTokenAAtomic": {
+        "type": "NUMERIC"
+      },
+      "volumeTokenBAtomic": {
+        "type": "NUMERIC"
+      },
+      "lpFeeAtomic": {
+        "type": "NUMERIC"
+      },
+      "protocolFeeAtomic": {
+        "type": "NUMERIC"
+      },
+      "tradeCount": {
+        "type": "BIGINT"
+      },
+      "firstEventTime": {
+        "type": "TIMESTAMPTZ"
+      },
+      "lastEventTime": {
+        "type": "TIMESTAMPTZ"
+      }
     }
   }
 }
