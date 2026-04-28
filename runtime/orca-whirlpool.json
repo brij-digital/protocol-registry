@@ -4635,6 +4635,7 @@
         "name": "position_data",
         "kind": "object.create",
         "fields": {
+          "address": "$input.position",
           "whirlpool": "$input.whirlpool",
           "position_mint": "$input.position_mint",
           "tick_lower_index": "$input.tick_lower_index",
@@ -4647,11 +4648,21 @@
         "name": "position_data",
         "kind": "object.create",
         "fields": {
+          "address": "$position",
           "whirlpool": "$input.whirlpool",
           "position_mint": "$input.position_mint",
           "tick_lower_index": "$tick_lower_index",
           "tick_upper_index": "$tick_upper_index"
         }
+      }
+    ],
+    "position_ref__from_input": [
+      {
+        "name": "position",
+        "kind": "coalesce",
+        "values": [
+          "$input.position"
+        ]
       }
     ],
     "positions_for_owner__candidate_positions": [
@@ -4689,8 +4700,7 @@
             "value": "position"
           },
           {
-            "kind": "pubkey",
-            "value": "$item"
+            "kind": "item_pubkey"
           }
         ]
       }
@@ -5265,7 +5275,7 @@
         "name": "position",
         "kind": "coalesce",
         "values": [
-          "$input.position"
+          "$position"
         ]
       },
       {
@@ -7762,6 +7772,10 @@
         {
           "kind": "transform",
           "transform": "position_range__derive_tick_arrays"
+        },
+        {
+          "kind": "transform",
+          "transform": "position_ref__from_input"
         },
         {
           "kind": "transform",
