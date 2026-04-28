@@ -2,6 +2,10 @@
   "schema": "solana-action-runner-registry.v1",
   "runners": [
     {
+      "actionId": "orca.close_position",
+      "path": "/action-runners/orca.close_position.runner.json"
+    },
+    {
       "actionId": "orca.collect_fees",
       "path": "/action-runners/orca.collect_fees.runner.json"
     },
