@@ -10,25 +10,10 @@
     "recordName": "PoolMetadata"
   },
   "transform": {
-    "resolve": [
-      {
-        "name": "createEvent",
-        "from": "record",
-        "recordKind": "event",
-        "recordName": "CreatePoolEvent",
-        "retention": "90d",
-        "where": {
-          "subject_id": "$raw.subject_id"
-        },
-        "optional": true
-      }
-    ],
     "extract": {
       "pool": "$raw.subject_id",
       "mint": "$state.mint",
       "quoteMint": "$state.quoteMint",
-      "baseDecimals": "$createEvent.baseDecimals",
-      "quoteDecimals": "$createEvent.quoteDecimals",
       "coinCreator": "$state.coinCreator",
       "isCashbackCoin": "$state.isCashbackCoin",
       "observedAt": "$state.observedAt",
@@ -48,8 +33,6 @@
       "mint": { "type": "TEXT", "filterable": true },
       "pool": { "type": "TEXT", "primaryKey": true, "filterable": true },
       "quoteMint": { "type": "TEXT", "filterable": true },
-      "baseDecimals": { "type": "INTEGER" },
-      "quoteDecimals": { "type": "INTEGER" },
       "coinCreator": { "type": "TEXT" },
       "isCashbackCoin": { "type": "BOOLEAN" },
       "observedAt": { "type": "TIMESTAMPTZ", "filterable": true },

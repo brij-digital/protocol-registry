@@ -112,9 +112,9 @@
                     "where": {
                       "type": "object",
                       "additionalProperties": true
-                    },
-                    "optional": { "type": "boolean" }
-                  }
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }

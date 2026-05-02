@@ -10,28 +10,12 @@
     "recordName": "Position"
   },
   "transform": {
-    "resolve": [
-      {
-        "name": "ownership",
-        "from": "state",
-        "recordKind": "state",
-        "recordName": "PositionOwnership",
-        "retention": "90d",
-        "where": {
-          "subject_id": "$raw.subject_id"
-        },
-        "optional": true
-      }
-    ],
     "extract": {
       "subjectId": "$raw.subject_id",
       "resourceId": "$raw.resource_id",
       "position": "$raw.subject_id",
       "whirlpool": "$state.whirlpool",
       "positionMint": "$state.positionMint",
-      "positionOwner": "$ownership.positionOwner",
-      "positionTokenAccount": "$ownership.positionTokenAccount",
-      "positionTokenProgram": "$ownership.positionTokenProgram",
       "liquidity": "$state.liquidity",
       "tickLowerIndex": "$state.tickLowerIndex",
       "tickUpperIndex": "$state.tickUpperIndex",
@@ -48,7 +32,6 @@
     "id": "position",
     "indexes": [
       ["whirlpool", "updatedAt:desc"],
-      ["positionOwner", "updatedAt:desc"],
       ["positionMint", "updatedAt:desc"],
       ["liquidity:desc", "updatedAt:desc"]
     ],
@@ -60,9 +43,6 @@
       "position": { "type": "TEXT", "primaryKey": true, "filterable": true },
       "whirlpool": { "type": "TEXT", "filterable": true },
       "positionMint": { "type": "TEXT", "filterable": true },
-      "positionOwner": { "type": "TEXT", "filterable": true },
-      "positionTokenAccount": { "type": "TEXT", "filterable": true },
-      "positionTokenProgram": { "type": "TEXT", "filterable": true },
       "liquidity": { "type": "NUMERIC", "filterable": true },
       "tickLowerIndex": { "type": "INTEGER" },
       "tickUpperIndex": { "type": "INTEGER" },

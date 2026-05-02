@@ -72,24 +72,6 @@
         "slot": "$update.slot",
         "observedAt": "$update.eventTime"
       },
-      "resolve": [
-        {
-          "name": "poolState",
-          "from": "indexed_idl_state",
-          "where": {
-            "protocol_id": "$protocolId",
-            "record_name": "Whirlpool",
-            "resource_id": "$ctx.pool"
-          },
-          "fields": [
-            "tokenMintA",
-            "tokenMintB",
-            "tokenDecimalsA",
-            "tokenDecimalsB"
-          ],
-          "optional": true
-        }
-      ],
       "compute": [
         {
           "ref": "logic.if_then_else",
@@ -124,10 +106,6 @@
             "outputTransferFeeAtomic": "$ctx.outputTransferFeeAtomic",
             "preSqrtPrice": "$ctx.preSqrtPrice",
             "postSqrtPrice": "$ctx.postSqrtPrice",
-            "tokenMintA": "$poolState.tokenMintA",
-            "tokenMintB": "$poolState.tokenMintB",
-            "tokenDecimalsA": "$poolState.tokenDecimalsA",
-            "tokenDecimalsB": "$poolState.tokenDecimalsB",
             "lpFeeAtomic": "$ctx.lpFeeAtomic",
             "protocolFeeAtomic": "$ctx.protocolFeeAtomic",
             "signature": "$ctx.signature",
@@ -155,10 +133,6 @@
             "outputTransferFeeAtomic": "$ctx.outputTransferFeeAtomic",
             "preSqrtPrice": "$ctx.preSqrtPrice",
             "postSqrtPrice": "$ctx.postSqrtPrice",
-            "tokenMintA": "$poolState.tokenMintA",
-            "tokenMintB": "$poolState.tokenMintB",
-            "tokenDecimalsA": "$poolState.tokenDecimalsA",
-            "tokenDecimalsB": "$poolState.tokenDecimalsB",
             "lpFeeAtomic": "$ctx.lpFeeAtomic",
             "protocolFeeAtomic": "$ctx.protocolFeeAtomic",
             "observedAt": "$ctx.observedAt"

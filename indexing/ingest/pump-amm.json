@@ -134,25 +134,6 @@
         "slot": "$update.slot",
         "observedAt": "$update.eventTime"
       },
-      "resolve": [
-        {
-          "name": "poolMetadata",
-          "from": "indexed_idl_state",
-          "where": {
-            "protocol_id": "$protocolId",
-            "record_name": "PoolMetadata",
-            "resource_id": "$ctx.pool"
-          },
-          "fields": [
-            "mint",
-            "quoteMint",
-            "baseDecimals",
-            "quoteDecimals",
-            "coinCreator"
-          ],
-          "optional": true
-        }
-      ],
       "emit": {
         "record": {
           "recordKind": "event",
@@ -170,13 +151,9 @@
             "side": "$ctx.side",
             "baseAmountAtomic": "$ctx.baseAmountAtomic",
             "quoteAmountAtomic": "$ctx.quoteAmountAtomic",
-            "mint": "$poolMetadata.mint",
-            "quoteMint": "$poolMetadata.quoteMint",
-            "baseDecimals": "$poolMetadata.baseDecimals",
-            "quoteDecimals": "$poolMetadata.quoteDecimals",
             "poolBaseReservesAtomic": "$ctx.poolBaseReservesAtomic",
             "poolQuoteReservesAtomic": "$ctx.poolQuoteReservesAtomic",
-            "coinCreator": "$poolMetadata.coinCreator",
+            "coinCreator": "$ctx.coinCreator",
             "signature": "$ctx.signature",
             "slot": "$ctx.slot",
             "observedAt": "$ctx.observedAt"
@@ -196,13 +173,9 @@
             "side": "$ctx.side",
             "baseAmountAtomic": "$ctx.baseAmountAtomic",
             "quoteAmountAtomic": "$ctx.quoteAmountAtomic",
-            "mint": "$poolMetadata.mint",
-            "quoteMint": "$poolMetadata.quoteMint",
-            "baseDecimals": "$poolMetadata.baseDecimals",
-            "quoteDecimals": "$poolMetadata.quoteDecimals",
             "poolBaseReservesAtomic": "$ctx.poolBaseReservesAtomic",
             "poolQuoteReservesAtomic": "$ctx.poolQuoteReservesAtomic",
-            "coinCreator": "$poolMetadata.coinCreator",
+            "coinCreator": "$ctx.coinCreator",
             "observedAt": "$ctx.observedAt"
           }
         }
@@ -222,25 +195,6 @@
         "slot": "$update.slot",
         "observedAt": "$update.eventTime"
       },
-      "resolve": [
-        {
-          "name": "poolMetadata",
-          "from": "indexed_idl_state",
-          "where": {
-            "protocol_id": "$protocolId",
-            "record_name": "PoolMetadata",
-            "resource_id": "$ctx.pool"
-          },
-          "fields": [
-            "mint",
-            "quoteMint",
-            "baseDecimals",
-            "quoteDecimals",
-            "coinCreator"
-          ],
-          "optional": true
-        }
-      ],
       "emit": {
         "record": {
           "recordKind": "event",
@@ -258,13 +212,9 @@
             "side": "$ctx.side",
             "baseAmountAtomic": "$ctx.baseAmountAtomic",
             "quoteAmountAtomic": "$ctx.quoteAmountAtomic",
-            "mint": "$poolMetadata.mint",
-            "quoteMint": "$poolMetadata.quoteMint",
-            "baseDecimals": "$poolMetadata.baseDecimals",
-            "quoteDecimals": "$poolMetadata.quoteDecimals",
             "poolBaseReservesAtomic": "$ctx.poolBaseReservesAtomic",
             "poolQuoteReservesAtomic": "$ctx.poolQuoteReservesAtomic",
-            "coinCreator": "$poolMetadata.coinCreator",
+            "coinCreator": "$ctx.coinCreator",
             "signature": "$ctx.signature",
             "slot": "$ctx.slot",
             "observedAt": "$ctx.observedAt"
@@ -284,13 +234,9 @@
             "side": "$ctx.side",
             "baseAmountAtomic": "$ctx.baseAmountAtomic",
             "quoteAmountAtomic": "$ctx.quoteAmountAtomic",
-            "mint": "$poolMetadata.mint",
-            "quoteMint": "$poolMetadata.quoteMint",
-            "baseDecimals": "$poolMetadata.baseDecimals",
-            "quoteDecimals": "$poolMetadata.quoteDecimals",
             "poolBaseReservesAtomic": "$ctx.poolBaseReservesAtomic",
             "poolQuoteReservesAtomic": "$ctx.poolQuoteReservesAtomic",
-            "coinCreator": "$poolMetadata.coinCreator",
+            "coinCreator": "$ctx.coinCreator",
             "observedAt": "$ctx.observedAt"
           }
         }

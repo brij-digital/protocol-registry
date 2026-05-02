@@ -353,48 +353,12 @@
       },
       "additionalProperties": false
     },
-    "resolveStepSpec": {
-      "type": "object",
-      "required": ["name", "from", "where"],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Variable name for resolved data (available as $name.field)"
-        },
-        "from": {
-          "type": "string",
-          "enum": ["indexed_idl_state", "indexed_idl_records"],
-          "description": "Table to read from (local DB, not RPC)"
-        },
-        "where": {
-          "type": "object",
-          "additionalProperties": { "$ref": "#/$defs/stringOrTemplate" },
-          "description": "Filter conditions (protocol_id auto-added if missing)"
-        },
-        "fields": {
-          "type": "array",
-          "items": { "type": "string" },
-          "description": "Which fields to project from the resolved payload"
-        },
-        "optional": {
-          "type": "boolean",
-          "default": false,
-          "description": "If true, missing data produces null fields instead of error"
-        }
-      },
-      "additionalProperties": false
-    },
     "pipelineSpec": {
       "type": "object",
       "properties": {
         "extract": {
           "type": "object",
           "additionalProperties": { "$ref": "#/$defs/stringOrTemplate" }
-        },
-        "resolve": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/resolveStepSpec" },
-          "description": "Read local DB state between extract and compute (replaces rpc_account_snapshot)"
         },
         "compute": {
           "type": "array",
