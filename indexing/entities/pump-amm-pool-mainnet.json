@@ -1,5 +1,8 @@
 {
   "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "indexId": "pump-amm-pool-mainnet",
+  "entityName": "Pool",
+  "sourceIndexingIds": ["pump-amm-mainnet"],
   "retention": "30d",
   "source": {
     "from": "state",

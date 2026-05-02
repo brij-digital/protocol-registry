@@ -1,5 +1,8 @@
 {
   "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "indexId": "pump-amm-trade-volume-1m-mainnet",
+  "entityName": "TradeVolume1m",
+  "sourceIndexingIds": ["pump-amm-mainnet"],
   "retention": "365d",
   "source": {
     "from": "record",

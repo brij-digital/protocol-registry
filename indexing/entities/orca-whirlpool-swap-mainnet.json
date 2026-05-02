@@ -1,5 +1,8 @@
 {
   "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "indexId": "orca-whirlpool-swap-mainnet",
+  "entityName": "Swap",
+  "sourceIndexingIds": ["orca-whirlpool-mainnet"],
   "retention": "7d",
   "source": {
     "from": "record",

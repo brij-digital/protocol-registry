@@ -1,5 +1,8 @@
 {
   "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "indexId": "orca-whirlpool-pool-volume-1m-mainnet",
+  "entityName": "PoolVolume1m",
+  "sourceIndexingIds": ["orca-whirlpool-mainnet"],
   "retention": "365d",
   "source": {
     "from": "record",

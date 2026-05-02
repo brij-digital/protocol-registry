@@ -2,14 +2,15 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Entity Transform Schema v1",
   "type": "object",
-  "required": ["indexingId", "sourceIndexingIds", "entities"],
+  "required": ["indexId", "sourceIndexingIds", "entities"],
   "properties": {
     "$schema": { "type": "string" },
-    "indexingId": { "type": "string" },
+    "indexId": { "type": "string", "minLength": 1 },
+    "indexingId": { "type": "string", "minLength": 1 },
     "sourceIndexingIds": {
       "type": "array",
       "minItems": 1,
-      "items": { "type": "string" }
+      "items": { "type": "string", "minLength": 1 }
     },
     "version": { "type": "string" },
     "entities": {

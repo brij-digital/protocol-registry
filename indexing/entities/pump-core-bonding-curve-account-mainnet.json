@@ -1,5 +1,8 @@
 {
   "$schema": "/indexing/entities/entity_definition_schema.v1.json",
+  "indexId": "pump-core-bonding-curve-account-mainnet",
+  "entityName": "BondingCurveAccount",
+  "sourceIndexingIds": ["pump-core-mainnet"],
   "retention": "30d",
   "source": {
     "from": "state",
