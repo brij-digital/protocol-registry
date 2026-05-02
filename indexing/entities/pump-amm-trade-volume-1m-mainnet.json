@@ -4,6 +4,12 @@
   "entityName": "TradeVolume1m",
   "sourceIndexingIds": ["pump-amm-mainnet"],
   "retention": "365d",
+  "limits": {
+    "maxLagSeconds": 30,
+    "maxBacklogRows": 1000000,
+    "maxTableBytes": 107374182400,
+    "maxApiP95Ms": 1000
+  },
   "source": {
     "from": "record",
     "recordKind": "event",

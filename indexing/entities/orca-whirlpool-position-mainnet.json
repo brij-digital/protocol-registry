@@ -4,6 +4,12 @@
   "entityName": "Position",
   "sourceIndexingIds": ["orca-whirlpool-mainnet"],
   "retention": "30d",
+  "limits": {
+    "maxLagSeconds": 30,
+    "maxBacklogRows": 1000000,
+    "maxTableBytes": 107374182400,
+    "maxApiP95Ms": 1000
+  },
   "source": {
     "from": "state",
     "recordKind": "account",
