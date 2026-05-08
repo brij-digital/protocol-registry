@@ -14,6 +14,7 @@ It stores the protocol metadata and JSON specs consumed by the other repos in th
 
 - `registry.json`: canonical top-level registry
 - `schemas/`: shared JSON schemas
+- `openapi/`: canonical OpenAPI JSON specs for paid APIs
 - `runtime/`: Solana agent runtime specs for reads, writes, and reusable transforms
 - `codama/`: codama/IDL source files
 - `indexing/ingest/`: canonical ingest specs
@@ -25,6 +26,10 @@ It stores the protocol metadata and JSON specs consumed by the other repos in th
 
 `registry.json` carries three top-level catalogs:
 
+- `paidApis[]`
+  - canonical paid API metadata
+  - OpenAPI JSON location via `openapiPath`
+  - upstream source URL via `upstreamOpenapiUrl`
 - `protocols[]`
   - canonical protocol metadata
   - runtime pack location via `agentRuntimePath`
@@ -91,6 +96,17 @@ The active API indexes today are:
 
 Entity authoring layout is flat:
 - `indexing/entities/<index_id>.json`
+
+## Paid APIs
+
+Paid API specs are stored as JSON under:
+
+```text
+openapi/<api_id>.openapi.json
+```
+
+The active paid API specs today are:
+- `brij-travel` — `https://travel.brij.fi`, stored at `openapi/travel.openapi.json`
 
 ## Action Policy Templates
 

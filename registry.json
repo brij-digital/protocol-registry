@@ -10,6 +10,18 @@
     "/write-raw",
     "/read-raw"
   ],
+  "paidApis": [
+    {
+      "id": "brij-travel",
+      "name": "BRIJ Flight API",
+      "category": "travel",
+      "baseUrl": "https://travel.brij.fi",
+      "openapiPath": "/openapi/travel.openapi.json",
+      "upstreamOpenapiUrl": "https://travel.brij.fi/openapi.json",
+      "paymentProtocol": "x402",
+      "status": "active"
+    }
+  ],
   "protocols": [
     {
       "id": "kamino-lending-mainnet",
