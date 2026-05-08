@@ -23,23 +23,50 @@ It stores the protocol metadata and JSON specs consumed by the other repos in th
 
 ## Canonical Model
 
-`registry.json` currently carries two main top-level catalogs:
+`registry.json` carries three top-level catalogs:
 
 - `protocols[]`
   - canonical protocol metadata
   - runtime pack location via `agentRuntimePath`
   - codama location via `codamaIdlPath`
 - `indexings[]`
-  - canonical indexing definitions
+  - canonical source-ingest definitions
   - source list via `sources[]`
-  - entity projection directory via `entitySchemaPath`
+- `indexes[]`
+  - canonical API datasets
+  - one entry per `index_id`
+  - source dependencies via `sourceIndexingIds`
+  - entity projection spec location via `entitySchemaPath`
 
 For indexing, the canonical path is now:
 - `indexings[].sources[].ingestSpecPath`
-- `indexings[].entitySchemaPath`
+- `indexes[].entitySchemaPath`
 
-`entitySchemaPath` now points directly to `indexing/entities/<indexingId>/`.
-Consumers scan that directory and merge one file per entity.
+`indexings[]` does not own API datasets. It only defines how source data enters
+the canonical raw/state layer.
+
+`indexes[]` owns API datasets. `indexes[].entitySchemaPath` points directly to
+one flat entity spec file:
+
+```text
+indexing/entities/<index_id>.json
+```
+
+Do not group entity specs by protocol directory. A protocol can have many API
+datasets, and each dataset is administered by its own `index_id`.
+
+Each entity spec must declare:
+- `indexId`: exactly the same id as `indexes[].id`
+- `sourceIndexingIds`: source dependencies
+- `retention`: projection retention window
+- `limits`: operational limits for lag, backlog, table bytes, and API P95
+- `source`, `transform`, and `emit`
+
+The active entity schema is:
+
+```text
+indexing/entities/entity_definition_schema.v1.json
+```
 
 ## Current Indexings
 
@@ -52,8 +79,18 @@ Their specs live under:
 - `indexing/ingest/`
 - `indexing/entities/`
 
-Entity authoring layout:
-- `indexing/entities/<indexingId>/<EntityName>.json`
+The active API indexes today are:
+- `orca-whirlpool-pool-mainnet`
+- `orca-whirlpool-pool-volume-1m-mainnet`
+- `orca-whirlpool-position-mainnet`
+- `orca-whirlpool-swap-mainnet`
+- `pump-amm-pool-mainnet`
+- `pump-amm-trade-mainnet`
+- `pump-amm-trade-volume-1m-mainnet`
+- `pump-core-bonding-curve-account-mainnet`
+
+Entity authoring layout is flat:
+- `indexing/entities/<index_id>.json`
 
 ## Action Policy Templates
 
@@ -86,11 +123,12 @@ Typical flow:
 2. Add or update the runtime pack under `runtime/`.
 3. If the protocol is indexed, add or update:
    - ingest spec under `indexing/ingest/`
-   - entity shards under `indexing/entities/`
-4. If the action is exposed through a runner, add or update the runner under `action-runners/`.
-5. If the action needs agent safety controls, add or update its template under `action-policy-templates/`.
-6. Register the protocol and/or indexing in `registry.json`.
-7. Prove the change in `protocol-conformance` when relevant.
+   - entity spec under `indexing/entities/<index_id>.json`
+4. Register source ingest in `registry.json#indexings[]`.
+5. Register each API dataset in `registry.json#indexes[]`.
+6. If the action is exposed through a runner, add or update the runner under `action-runners/`.
+7. If the action needs agent safety controls, add or update its template under `action-policy-templates/`.
+8. Prove the change in `protocol-indexing` and `protocol-conformance` when relevant.
 
 ## Notes
 
