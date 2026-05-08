@@ -1,0 +1,111 @@
+{
+  "$schema": "/schemas/brij_action_policy_template.schema.v0.json",
+  "schema": "brij-action-policy-template.v0",
+  "actionId": "orca.quote_and_swap_exact_in",
+  "runnerPath": "/action-runners/orca.quote_and_swap_exact_in.runner.json",
+  "controls": {
+    "maxInputAmount": {
+      "type": "u64",
+      "required": true,
+      "description": "Maximum input token amount this policy allows the agent to spend for one swap."
+    },
+    "maxSlippageBps": {
+      "type": "u16",
+      "required": true,
+      "description": "Maximum slippage tolerance in basis points. 200 means 2%."
+    },
+    "allowedInputMints": {
+      "type": "token_mint[]",
+      "required": true,
+      "description": "Input token mints this policy allows for the swap."
+    },
+    "allowedOutputMints": {
+      "type": "token_mint[]",
+      "required": true,
+      "description": "Output token mints this policy allows for the swap."
+    },
+    "allowUnwrapSolOutput": {
+      "type": "bool",
+      "required": false,
+      "default": false,
+      "description": "Whether this policy allows closing the wrapped SOL output account after the swap."
+    }
+  },
+  "rules": {
+    "preconditions": [
+      {
+        "id": "amount_in_lte_policy_max",
+        "left": "$input.amount_in",
+        "op": "lte",
+        "right": "$policy.maxInputAmount"
+      },
+      {
+        "id": "slippage_bps_lte_policy_max",
+        "left": "$input.slippage_bps",
+        "op": "lte",
+        "right": "$policy.maxSlippageBps"
+      },
+      {
+        "id": "input_mint_allowed",
+        "left": "$input.token_in_mint",
+        "op": "in",
+        "right": "$policy.allowedInputMints"
+      },
+      {
+        "id": "output_mint_allowed",
+        "left": "$input.token_out_mint",
+        "op": "in",
+        "right": "$policy.allowedOutputMints"
+      },
+      {
+        "id": "unwrap_sol_output_matches_policy",
+        "left": "$input.unwrap_sol_output",
+        "op": "eq",
+        "right": "$policy.allowUnwrapSolOutput"
+      }
+    ],
+    "stepInvariants": [
+      {
+        "id": "quote_uses_runner_slippage_input",
+        "left": "$steps.quote.input.slippage_bps",
+        "op": "eq",
+        "right": "$input.slippage_bps"
+      },
+      {
+        "id": "swap_amount_comes_from_quote",
+        "left": "$steps.swap.input.amount",
+        "op": "eq",
+        "right": "$steps.quote.output.amount_in"
+      },
+      {
+        "id": "swap_threshold_comes_from_quote_minimum_out",
+        "left": "$steps.swap.input.other_amount_threshold",
+        "op": "eq",
+        "right": "$steps.quote.output.minimum_out"
+      }
+    ],
+    "postconditions": [
+      {
+        "id": "input_token_spend_lte_amount_in",
+        "type": "token_delta_gte",
+        "owner": "$wallet",
+        "mint": "$input.token_in_mint",
+        "delta": {
+          "neg": "$input.amount_in"
+        }
+      },
+      {
+        "id": "output_token_receive_gte_quote_minimum_out",
+        "type": "token_delta_gte",
+        "owner": "$wallet",
+        "mint": "$input.token_out_mint",
+        "delta": "$steps.quote.output.minimum_out"
+      }
+    ]
+  },
+  "enforcement": {
+    "preflight": "required",
+    "transactionEnvelope": "derive_from_runner_and_lock",
+    "appendGuard": false
+  }
+}

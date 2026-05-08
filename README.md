@@ -19,6 +19,7 @@ It stores the protocol metadata and JSON specs consumed by the other repos in th
 - `indexing/ingest/`: canonical ingest specs
 - `indexing/entities/`: canonical entity projection specs for `protocol-indexing`
 - `action-runners/`: action-runner registry for higher-level linear flows
+- `action-policy-templates/`: canonical policy templates for action runners
 
 ## Canonical Model
 
@@ -54,6 +55,19 @@ Their specs live under:
 Entity authoring layout:
 - `indexing/entities/<indexingId>/<EntityName>.json`
 
+## Action Policy Templates
+
+Action runners are global protocol capabilities. Action policy templates describe the
+policy controls and safety checks that can be attached to those runners by an app,
+agent, session, or user.
+
+This repo stores only templates. Concrete user policies and control values should live
+in the consuming app, MCP server, wallet layer, or database.
+
+Template layout:
+- `action-policy-templates/action_policy_templates.json`
+- `action-policy-templates/<actionId>.template.json`
+
 ## Consumers
 
 This repo is consumed by:
@@ -73,8 +87,10 @@ Typical flow:
 3. If the protocol is indexed, add or update:
    - ingest spec under `indexing/ingest/`
    - entity shards under `indexing/entities/`
-4. Register the protocol and/or indexing in `registry.json`.
-5. Prove the change in `protocol-conformance` when relevant.
+4. If the action is exposed through a runner, add or update the runner under `action-runners/`.
+5. If the action needs agent safety controls, add or update its template under `action-policy-templates/`.
+6. Register the protocol and/or indexing in `registry.json`.
+7. Prove the change in `protocol-conformance` when relevant.
 
 ## Notes
 

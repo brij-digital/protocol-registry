@@ -1,0 +1,9 @@
+{
+  "schema": "brij-action-policy-template-registry.v0",
+  "templates": [
+    {
+      "actionId": "orca.quote_and_swap_exact_in",
+      "path": "/action-policy-templates/orca.quote_and_swap_exact_in.template.json"
+    }
+  ]
+}

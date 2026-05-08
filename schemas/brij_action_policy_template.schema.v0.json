@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/brij_action_policy_template.schema.v0.json",
+  "title": "BRIJ Action Policy Template V0",
+  "type": "object",
+  "required": ["schema", "actionId", "runnerPath", "controls", "rules", "enforcement"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema": {
+      "const": "brij-action-policy-template.v0"
+    },
+    "actionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runnerPath": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/controlSpec"
+      }
+    },
+    "rules": {
+      "type": "object",
+      "required": ["preconditions", "stepInvariants", "postconditions"],
+      "properties": {
+        "preconditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assertionRule"
+          }
+        },
+        "stepInvariants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assertionRule"
+          }
+        },
+        "postconditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/postconditionRule"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "enforcement": {
+      "type": "object",
+      "required": ["preflight", "transactionEnvelope"],
+      "properties": {
+        "preflight": {
+          "enum": ["required"]
+        },
+        "transactionEnvelope": {
+          "enum": ["derive_from_runner_and_lock"]
+        },
+        "appendGuard": {
+          "type": "boolean"
+        },
+        "guardPosition": {
+          "enum": ["last"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "controlSpec": {
+      "type": "object",
+      "required": ["type", "required"],
+      "properties": {
+        "type": {
+          "enum": ["u16", "u64", "token_mint", "token_mint[]", "bool", "string"]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "default": {},
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "assertionRule": {
+      "type": "object",
+      "required": ["id", "left", "op", "right"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "left": {
+          "$ref": "#/$defs/value"
+        },
+        "op": {
+          "enum": ["eq", "neq", "lt", "lte", "gt", "gte", "in"]
+        },
+        "right": {
+          "$ref": "#/$defs/value"
+        }
+      },
+      "additionalProperties": false
+    },
+    "postconditionRule": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": ["token_delta_gte", "token_delta_lte", "sol_delta_gte", "account_owner_eq", "account_mint_eq"]
+        },
+        "owner": {
+          "$ref": "#/$defs/value"
+        },
+        "account": {
+          "$ref": "#/$defs/value"
+        },
+        "mint": {
+          "$ref": "#/$defs/value"
+        },
+        "delta": {
+          "$ref": "#/$defs/value"
+        },
+        "value": {
+          "$ref": "#/$defs/value"
+        }
+      },
+      "additionalProperties": false
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "neg": {
+              "$ref": "#/$defs/value"
+            }
+          },
+          "required": ["neg"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
